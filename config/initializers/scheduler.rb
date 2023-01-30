@@ -2,6 +2,6 @@ require 'rufus-scheduler'
 
 scheduler = Rufus::Scheduler.new
 
-scheduler.every '1h' do
-  # do stuff
+scheduler.at '*/* 0:0:0:0' do
+  WeatherReportsDailyFillJob.perform_later
 end

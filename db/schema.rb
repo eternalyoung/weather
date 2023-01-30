@@ -16,6 +16,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_22_192819) do
     t.integer "timestamp"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["timestamp"], name: "index_weather_reports_on_timestamp", unique: true
   end
 
 end
