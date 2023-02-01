@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :weather_reports, only: :show
+
   scope :weather do
     get :current, to: 'weather_reports#current'
     get :historical, to: 'weather_reports#historical'
@@ -9,4 +11,6 @@ Rails.application.routes.draw do
   end
 
   get :health, to: 'application#health'
+
+  root 'application#health'
 end
