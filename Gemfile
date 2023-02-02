@@ -15,6 +15,9 @@ gem "whenever", "~> 1.0", require: false
 group :development, :test do
   gem "debug", platforms: %i[mri mingw x64_mingw]
   gem "sqlite3", "~> 1.4"
+
+  gem "factory_bot_rails", "~> 6.2"
+  gem "rspec-rails", "~> 6.0"
 end
 
 group :production do
