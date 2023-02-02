@@ -33,7 +33,7 @@ class WeatherReportsController < ApplicationController
     @weather_report = WeatherReport.find_by(timestamp: params[:timestamp])
 
     if @weather_report.nil?
-      render json: { error: "Oops! Looks like we don't have it" }, status: 404
+      render "errors/404", status: 404
     else
       render :show
     end

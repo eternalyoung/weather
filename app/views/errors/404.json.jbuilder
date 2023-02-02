@@ -1,5 +1,5 @@
 json.errors do
   json.status "404"
   json.title "Not Found"
-  json.detail @exception
+  json.detail @exception unless @exception.nil?
 end

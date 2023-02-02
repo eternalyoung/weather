@@ -1,0 +1,330 @@
+---
+openapi: 3.0.1
+info:
+  title: WEATHER API
+  version: v1
+paths:
+  "/health":
+    get:
+      summary: health of application
+      tags:
+      - Health
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: ok
+  "/":
+    get:
+      summary: health of application
+      tags:
+      - Health
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: ok
+  "/weather_reports/{id}":
+    get:
+      summary: show weather report
+      tags:
+      - Reports
+      parameters:
+      - name: id
+        in: path
+        description: ID of report
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      type:
+                        type: string
+                      id:
+                        type: integer
+                      attributes:
+                        type: object
+                        properties:
+                          temperature:
+                            type: number
+                          timestamp:
+                            type: integer
+                      links:
+                        type: object
+                        properties:
+                          self:
+                            type: string
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: object
+                    properties:
+                      status:
+                        type: string
+                        example: '404'
+                      title:
+                        type: string
+                        example: Not Found
+                      detail:
+                        type: string
+                        example: Couldn't find WeatherReport with 'id'=1
+  "/weather/current":
+    get:
+      summary: show current weather report
+      tags:
+      - Reports
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      type:
+                        type: string
+                      id:
+                        type: integer
+                      attributes:
+                        type: object
+                        properties:
+                          temperature:
+                            type: number
+                          timestamp:
+                            type: integer
+                      links:
+                        type: object
+                        properties:
+                          self:
+                            type: string
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: object
+                    properties:
+                      status:
+                        type: string
+                        example: '404'
+                      title:
+                        type: string
+                        example: Not Found
+                      detail:
+                        type: string
+                        example: Couldn't find WeatherReport with 'id'=1
+  "/weather/historical":
+    get:
+      summary: shows weather reports for the last 24 hours
+      tags:
+      - Reports
+      - Historical
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        type:
+                          type: string
+                        id:
+                          type: integer
+                        attributes:
+                          type: object
+                          properties:
+                            temperature:
+                              type: number
+                            timestamp:
+                              type: integer
+                        links:
+                          type: object
+                          properties:
+                            self:
+                              type: string
+  "/weather/historical/max":
+    get:
+      summary: shows weather report with the highest temperature in the last 24 hours
+      tags:
+      - Reports
+      - Historical
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      type:
+                        type: string
+                      id:
+                        type: integer
+                      attributes:
+                        type: object
+                        properties:
+                          temperature:
+                            type: number
+                          timestamp:
+                            type: integer
+                      links:
+                        type: object
+                        properties:
+                          self:
+                            type: string
+  "/weather/historical/min":
+    get:
+      summary: shows weather report with the lowest temperature in the last 24 hours
+      tags:
+      - Reports
+      - Historical
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      type:
+                        type: string
+                      id:
+                        type: integer
+                      attributes:
+                        type: object
+                        properties:
+                          temperature:
+                            type: number
+                          timestamp:
+                            type: integer
+                      links:
+                        type: object
+                        properties:
+                          self:
+                            type: string
+  "/weather/historical/avg":
+    get:
+      summary: shows weather report with the lowest temperature in the last 24 hours
+      tags:
+      - Reports
+      - Historical
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      average_temperature:
+                        type: number
+  "/weather/by_time":
+    get:
+      summary: show weather report
+      tags:
+      - Reports
+      parameters:
+      - name: timestamp
+        in: query
+        description: Timestamp of report
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      type:
+                        type: string
+                      id:
+                        type: integer
+                      attributes:
+                        type: object
+                        properties:
+                          temperature:
+                            type: number
+                          timestamp:
+                            type: integer
+                      links:
+                        type: object
+                        properties:
+                          self:
+                            type: string
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: object
+                    properties:
+                      status:
+                        type: string
+                        example: '404'
+                      title:
+                        type: string
+                        example: Not Found
+servers:
+- url: https://{defaultHost}
+  variables:
+    defaultHost:
+      default: weather.kadproject.ru
+- url: http://{localtHost}
+  variables:
+    localtHost:
+      default: 127.0.0.1:3000
